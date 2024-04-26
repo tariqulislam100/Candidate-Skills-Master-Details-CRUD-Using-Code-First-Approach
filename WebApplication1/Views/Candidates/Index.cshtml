@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Candidate>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Candidate List</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-2">Add New</a>
+
+@foreach(var item in Model)
+{
+    <div class="card mb-2">
+        <div class="card-header d-flex justify-content-between">
+            <div>
+                <img src="@item.Image" width="40" />
+                <b>Name : </b>@item.CandidateName
+                <b>Dob : </b>@item.DateOfBirth
+                <b>Phone : </b>@item.Phone
+                <b>Fresher? : </b>@Html.DisplayFor(x => item.Fresher)
+            </div>
+            <div>
+                <a asp-action="Edit" asp-route-id="@item.CandidateId" class="btn btn-success">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.CandidateId" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <b>Skill</b>
+            @foreach (var i in item.CandidateSkills)
+            {
+                <ul>
+                    <li>@i.Skill.SkillName</li>
+                </ul>
+            }
+        </div>
+    </div>
+}
